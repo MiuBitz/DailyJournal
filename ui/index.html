@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Journal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1>Daily Journal</h1>
+        <p class="subtitle">Three tiny check-ins. One clean Markdown dataset.</p>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-icon" id="btn-settings-toggle" title="Settings">⚙ Settings</button>
+        <div class="status-badge">
+          <span class="dot">●</span> Tray Active
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard: Today's Check-in Blocks Card -->
+    <section class="card">
+      <h2 class="card-title" id="today-heading">📅 Today</h2>
+      
+      <div class="block-list">
+        <div class="block-item">
+          <div class="block-info">
+            <span class="block-name">Morning Check-in</span>
+            <span class="block-time" id="time-morning">Time Window: 05:00 – 12:00</span>
+          </div>
+          <button class="btn btn-primary" id="btn-write-morning">✏ Write Journal</button>
+        </div>
+
+        <div class="block-item">
+          <div class="block-info">
+            <span class="block-name">Afternoon Check-in</span>
+            <span class="block-time" id="time-afternoon">Time Window: 12:00 – 18:00</span>
+          </div>
+          <button class="btn btn-primary" id="btn-write-afternoon">✏ Write Journal</button>
+        </div>
+
+        <div class="block-item">
+          <div class="block-info">
+            <span class="block-name">Evening Check-in</span>
+            <span class="block-time" id="time-evening">Time Window: 18:00 – 22:00</span>
+          </div>
+          <button class="btn btn-primary" id="btn-write-evening">✏ Write Journal</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolbar Actions -->
+    <div class="toolbar">
+      <button class="btn btn-secondary" id="btn-create-today">📝 Create Today's Files</button>
+      <button class="btn btn-secondary" id="btn-open-folder">📂 Open Journal Folder</button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <!-- Settings Modal Panel -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal-card settings-card">
+      <div class="modal-header">
+        <h2>⚙ Settings</h2>
+        <button class="btn-close" id="btn-close-settings">✕</button>
+      </div>
+
+      <div class="setting-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="chk-autostart" />
+          <span>Start automatically with Windows</span>
+        </label>
+        <span class="hint">App stays in system tray when closed.</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3 class="section-subtitle">Configure Reminder Times (24h HH:MM):</h3>
+
+      <div class="schedule-inputs">
+        <div class="schedule-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-rem-morning" />
+            <span>Morning reminder at:</span>
+          </label>
+          <input type="text" id="time-input-morning" class="text-input time-input" placeholder="12:00" />
+        </div>
+
+        <div class="schedule-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-rem-afternoon" />
+            <span>Afternoon reminder at:</span>
+          </label>
+          <input type="text" id="time-input-afternoon" class="text-input time-input" placeholder="18:00" />
+        </div>
+
+        <div class="schedule-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="chk-rem-evening" />
+            <span>Evening reminder at:</span>
+          </label>
+          <input type="text" id="time-input-evening" class="text-input time-input" placeholder="22:00" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3 class="section-subtitle">📁 Journal Storage Folder:</h3>
+      <div class="folder-picker">
+        <input type="text" id="folder-path" class="text-input folder-input" readonly />
+        <button class="btn btn-outline" id="btn-browse-folder">Browse...</button>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-save-settings">✓ Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reminder Popup Modal -->
+  <div id="reminder-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h2 id="modal-title">Journal Reminder</h2>
+      <p id="modal-desc">Take a minute to record check-in.</p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="btn-modal-write">Write Journal</button>
+        <button class="btn btn-outline" id="btn-modal-later">Later</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
